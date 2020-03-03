@@ -10,8 +10,6 @@ public class Main extends ConsoleProgram {
     public static JFrame frame = new JFrame();
     public static BingoHome bingoHome = new BingoHome();
     public static Bingo bingo = new Bingo();
-    public static AdminPageLogin adminPageLogin = new AdminPageLogin();
-    public static AdminPage adminPage = new AdminPage();
 
     public static void main(String[] args)
     {
@@ -22,7 +20,8 @@ public class Main extends ConsoleProgram {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        frame.setContentPane(bingoHome.getjPanel());
+//        frame.setContentPane(bingoHome.getjPanel());
+        frame.setContentPane(bingo.getjPanel());
     }
 
 }
