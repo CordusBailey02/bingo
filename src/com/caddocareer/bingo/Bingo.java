@@ -9,7 +9,7 @@ public class Bingo {
     private JLabel labelPlayer1Score;
     private JLabel labelPlayer2Score;
     private JPanel board;
-    public BoardGraphics boardGraphics = new BoardGraphics();
+    public Board boardGraphics = new Board();
 
     public JPanel getjPanel()
     {
