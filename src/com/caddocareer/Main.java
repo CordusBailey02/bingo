@@ -2,6 +2,7 @@ package com.caddocareer;
 
 import com.caddocareer.bingo.Bingo;
 import com.caddocareer.bingo.BingoHome;
+import com.caddocareer.bingo.Board;
 
 import javax.swing.*;
 
@@ -10,6 +11,7 @@ public class Main extends ConsoleProgram {
     public static JFrame frame = new JFrame();
     public static BingoHome bingoHome = new BingoHome();
     public static Bingo bingo = new Bingo();
+    public static Board boardGraph = new Board();
 
     public static void main(String[] args)
     {
@@ -20,8 +22,7 @@ public class Main extends ConsoleProgram {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-//        frame.setContentPane(bingoHome.getjPanel());
-        frame.setContentPane(bingo.getjPanel());
+        frame.setContentPane(bingoHome.getjPanel());
     }
 
 }

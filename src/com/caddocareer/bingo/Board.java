@@ -13,21 +13,18 @@ public class Board extends JPanel {
         setVisible(true);
         setPreferredSize(new Dimension(450,450));
         setMinimumSize(new Dimension(450,450));
-
-        displayNumbers(Main.bingoHome.getBoardNums());
     }
 
     @Override
     public void paintComponent(Graphics g)
     {
+        markSpot(g);
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
         drawGrid(g);
 
-        //Draws Free Spot
-        g.drawString("Free", 210, 225);
-        g.drawString("Free", 35, 50);
+        displayNumbers(Main.bingoHome.getBoardNums(), g);
     }
 
     public void drawGrid(Graphics g)
@@ -45,14 +42,28 @@ public class Board extends JPanel {
         }
     }
 
-    private void displayNumbers(String[][] nums)
+    private void displayNumbers(String[][] nums, Graphics g)
     {
+        int column = 0;
+        int x = 35;
+        int y = 50;
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-
+                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, column)), x, y);
+                y += 90;
             }
+            column++;
+            x += 90;
+            y = 50;
         }
+    }
+
+    public void markSpot(Graphics g)
+    {
+        g.setColor(Color.RED);
+        g.drawOval(70, 70, 70, 70);
+        g.fillOval(70, 70, 70, 70);
     }
 }
