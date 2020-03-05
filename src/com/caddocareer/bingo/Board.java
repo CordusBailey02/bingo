@@ -44,17 +44,17 @@ public class Board extends JPanel {
 
     private void displayNumbers(String[][] nums, Graphics g)
     {
-        int column = 0;
+        int row = 0;
         int x = 35;
         int y = 50;
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, column)), x, y);
+                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, row)), x, y);
                 y += 90;
             }
-            column++;
+            row++;
             x += 90;
             y = 50;
         }

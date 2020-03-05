@@ -12,9 +12,6 @@ public class BingoHome {
     private JPanel jPanel;
     private JButton startGameButton;
     private JComboBox comboBoxDiff;
-//    private static final int EASY = 25;
-//    private static final int NORMAL = 50;
-//    private static final int HARD = 75;
     private String[][] boardNums = new String[5][5];
 
     public JPanel getjPanel()
@@ -59,14 +56,14 @@ public class BingoHome {
         {
             difficulty = 75;
         }
-        int col = 0;
+        int row = 0;
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-                boardNums[j][col] = String.valueOf(Randomizer.nextInt(0, difficulty));
+                boardNums[j][row] = String.valueOf(Randomizer.nextInt(0, difficulty));
             }
-            col++;
+            row++;
         }
         if(difficulty < 75)
         {
