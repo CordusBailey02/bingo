@@ -51,7 +51,11 @@ public class Board extends JPanel {
         {
             for(int j = 0; j < 5; j++)
             {
-                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, row)), x, y);
+//                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, row)), x, y);
+                JLabel spot = new JLabel(Main.bingoHome.getBoardNum(j, row))
+                this.add(spot);
+//                spot.set
+
                 y += 90;
             }
             row++;
@@ -60,10 +64,10 @@ public class Board extends JPanel {
         }
     }
 
-    public void markSpot(Graphics g)
+    public void markSpot(Graphics g, int x, int y)
     {
         g.setColor(Color.RED);
-        g.drawOval(70, 70, 70, 70);
+        g.drawOval(90 * , 70, 70, 70);
         g.fillOval(70, 70, 70, 70);
     }
 }

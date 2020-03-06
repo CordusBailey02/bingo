@@ -18,15 +18,14 @@ public class BingoHome {
     {
         return jPanel;
     }
-
     public String[][] getBoardNums()
     {
         return boardNums;
     }
-
-    public String getBoardNum(int row, int column) {
-        return boardNums[row][column];
+    public String getBoardNum(int column, int row) {
+        return boardNums[column][row];
     }
+    public JComboBox getComboBoxDiff() { return comboBoxDiff; }
 
     public BingoHome()
     {
