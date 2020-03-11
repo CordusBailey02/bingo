@@ -4,8 +4,12 @@ import com.caddocareer.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board extends JPanel {
+
+    private ArrayList<Integer> xs = new ArrayList<Integer>();
+    private ArrayList<Integer> ys = new ArrayList<Integer>();
 
     public Board()
     {
@@ -18,13 +22,14 @@ public class Board extends JPanel {
     @Override
     public void paintComponent(Graphics g)
     {
-        markSpot(g);
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
         drawGrid(g);
 
         displayNumbers(Main.bingoHome.getBoardNums(), g);
+
+        markSpot(g, xs.get(0), ys.get(1));
     }
 
     public void drawGrid(Graphics g)
@@ -51,11 +56,9 @@ public class Board extends JPanel {
         {
             for(int j = 0; j < 5; j++)
             {
-//                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, row)), x, y);
-                JLabel spot = new JLabel(Main.bingoHome.getBoardNum(j, row))
-                this.add(spot);
-//                spot.set
-
+                g.drawString(String.valueOf(Main.bingoHome.getBoardNum(j, row)), x, y);
+                xs.add(x);
+                ys.add(y);
                 y += 90;
             }
             row++;
@@ -64,10 +67,19 @@ public class Board extends JPanel {
         }
     }
 
+    public int getXCord(int column)
+    {
+        return xs.get(column);
+    }
+
+    public int getYCord(int row)
+    {
+        return ys.get(row);
+    }
+
     public void markSpot(Graphics g, int x, int y)
     {
         g.setColor(Color.RED);
-        g.drawOval(90 * , 70, 70, 70);
-        g.fillOval(70, 70, 70, 70);
+        g.fillOval(x - 25, y - 40, 70, 70);
     }
 }
