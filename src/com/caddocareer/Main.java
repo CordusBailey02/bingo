@@ -5,6 +5,7 @@ import com.caddocareer.bingo.BingoHome;
 import com.caddocareer.bingo.Board;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main extends ConsoleProgram {
 

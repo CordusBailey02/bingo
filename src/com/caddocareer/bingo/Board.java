@@ -1,6 +1,7 @@
 package com.caddocareer.bingo;
 
 import com.caddocareer.Main;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ public class Board extends JPanel{
 
     private ArrayList<Integer> xs = new ArrayList<Integer>();
     private ArrayList<Integer> ys = new ArrayList<Integer>();
+    public Graphics graphics = null;
 
     public Board()
     {
@@ -28,8 +30,6 @@ public class Board extends JPanel{
         drawGrid(g);
 
         displayNumbers(Main.bingoHome.getBoardNums(), g);
-
-//        markSpot(g, xs.get(0), ys.get(1));
     }
 
     public void drawGrid(Graphics g)
@@ -67,19 +67,19 @@ public class Board extends JPanel{
         }
     }
 
-    public int getXCord(int column)
+    public int getXCord(int colNum)
     {
-        return xs.get(column);
+        return xs.get(colNum);
+    }
+    public int getYCord(int rowNum)
+    {
+        return xs.get(rowNum);
     }
 
-    public int getYCord(int row)
-    {
-        return ys.get(row);
-    }
 
-    public void markSpot(Graphics g, int x, int y)
+    public void markSpot(int x, int y)
     {
-        g.setColor(Color.RED);
-        g.fillOval(x - 25, y - 40, 70, 70);
+        graphics.setColor(Color.RED);
+        graphics.fillOval(x - 25, y - 40, 70, 70);
     }
 }
