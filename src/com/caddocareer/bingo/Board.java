@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Board extends JPanel {
+public class Board extends JPanel{
 
     private ArrayList<Integer> xs = new ArrayList<Integer>();
     private ArrayList<Integer> ys = new ArrayList<Integer>();
@@ -29,7 +29,7 @@ public class Board extends JPanel {
 
         displayNumbers(Main.bingoHome.getBoardNums(), g);
 
-        markSpot(g, xs.get(0), ys.get(1));
+//        markSpot(g, xs.get(0), ys.get(1));
     }
 
     public void drawGrid(Graphics g)

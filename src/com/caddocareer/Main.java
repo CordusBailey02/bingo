@@ -11,7 +11,7 @@ public class Main extends ConsoleProgram {
     public static JFrame frame = new JFrame();
     public static BingoHome bingoHome = new BingoHome();
     public static Bingo bingo = new Bingo();
-    public static Board boardGraph = new Board();
+    public static Board board = new Board();
 
     public static void main(String[] args)
     {

@@ -7,31 +7,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Bingo extends JPanel{
+public class Bingo {
     private JPanel jPanel;
     private JPanel board;
     private JButton buttonPlay;
     private JLabel labelChosenNum;
     private JButton button1;
     private static boolean[][] tracker = new boolean[5][5];
+    private Board boardGraph = new Board();
+    int colSelectCord = 0;
+    int rowSelectCord = 0;
 
     public JPanel getjPanel()
     {
         return jPanel;
     }
 
-    int colSelectCord = 0;
-    int rowSelectCord = 0;
     public Bingo()
     {
-        board.add(Main.boardGraph);
+        board.add(boardGraph);
 
         buttonPlay.addActionListener(new ActionListener() {
             @Override
@@ -40,48 +39,30 @@ public class Bingo extends JPanel{
                 labelChosenNum.setText(chooseNum((String) Objects.requireNonNull(Main.bingoHome.getComboBoxDiff().getSelectedItem())));
             }
         });
-        board.addMouseListener(new MouseListener() {
-            int x = 0;
-            int y = 0;
+        button1.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                x = e.getX();
-                y = e.getY();
-                int xCord = 90;
-                int yCord = 90;
+            public void actionPerformed(ActionEvent actionEvent) {
+                int x = 120;
+                int y = 120;
+//                public void mouseClicked(MouseEvent e) {
+//                    x = e.getX();
+//                    y = e.getY();
+                    int xCord = 90;
+                    int yCord = 90;
 
-                for(int i = 0; i < 5; i++)
-                {
-                    for(int j = 0; j < 5; j++) {
-                        if ((x > xCord && x < xCord * 2) && (y < yCord && y > yCord * 2)) {
-                            checkMatch();
+                    for(int i = 0; i < 5; i++)
+                    {
+                        for(int j = 0; j < 5; j++) {
+                            if ((x > xCord && x < xCord * 2) && (y < yCord && y > yCord * 2)) {
+                                checkMatch();
+                            }
+                            xCord += 90;
+                            colSelectCord++;
                         }
-                        xCord += 90;
-                        colSelectCord++;
+                        yCord += 90;
+                        rowSelectCord++;
                     }
-                    yCord += 90;
-                    rowSelectCord++;
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
+//                }
             }
         });
     }
@@ -135,7 +116,7 @@ public class Bingo extends JPanel{
             if(Integer.parseInt(Main.bingoHome.getBoardNum(colSelectCord, rowSelectCord)) == Integer.parseInt(Main.bingoHome.getBoardNum(colNum, i)))
             {
                 tracker[colNum][i] = true;
-                Main.boardGraph.markSpot(new Graphics() {
+                Main.board.markSpot(new Graphics() {
                     @Override
                     public Graphics create() {
                         return null;
