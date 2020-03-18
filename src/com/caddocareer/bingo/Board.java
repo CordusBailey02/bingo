@@ -11,7 +11,6 @@ public class Board extends JPanel{
 
     private ArrayList<Integer> xs = new ArrayList<Integer>();
     private ArrayList<Integer> ys = new ArrayList<Integer>();
-    public Graphics graphics = null;
 
     public Board()
     {
@@ -30,6 +29,7 @@ public class Board extends JPanel{
         drawGrid(g);
 
         displayNumbers(Main.bingoHome.getBoardNums(), g);
+
     }
 
     public void drawGrid(Graphics g)
@@ -47,7 +47,7 @@ public class Board extends JPanel{
         }
     }
 
-    private void displayNumbers(String[][] nums, Graphics g)
+    public void displayNumbers(String[][] nums, Graphics g)
     {
         int row = 0;
         int x = 35;
@@ -67,19 +67,10 @@ public class Board extends JPanel{
         }
     }
 
-    public int getXCord(int colNum)
+    public void markSpot(Graphics g, int x, int y)
     {
-        return xs.get(colNum);
-    }
-    public int getYCord(int rowNum)
-    {
-        return xs.get(rowNum);
+        g.setColor(Color.RED);
+        g.fillOval(x + 45, y - 5,70, 70);
     }
 
-
-    public void markSpot(int x, int y)
-    {
-        graphics.setColor(Color.RED);
-        graphics.fillOval(x - 25, y - 40, 70, 70);
-    }
 }

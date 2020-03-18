@@ -4,12 +4,10 @@ import com.caddocareer.Main;
 import com.caddocareer.Randomizer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.PaintEvent;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -23,6 +21,7 @@ public class Bingo {
     public Board boardGraph = new Board();
     int colSelectCord = 0;
     int rowSelectCord = 0;
+    String colSel = "";
 
     public JPanel getjPanel()
     {
@@ -43,29 +42,62 @@ public class Bingo {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                int x = 120;
-                int y = 120;
-//                public void mouseClicked(MouseEvent e) {
-//                    x = e.getX();
-//                    y = e.getY();
-                    int xCord = 90;
-                    int yCord = 90;
-
-                    for(int i = 0; i < 5; i++)
-                    {
-                        for(int j = 0; j < 5; j++) {
-                            if ((x > xCord && x < xCord * 2) && (y < yCord && y > yCord * 2)) {
-                                checkMatch();
-                            }
-                            xCord += 90;
-                            colSelectCord++;
-                        }
-                        yCord += 90;
-                        rowSelectCord++;
-                    }
-//                }
+                checkMatch();
             }
         });
+        jPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                    int x = e.getX();
+                    int y = e.getY();
+                    System.out.println(x + " " + y);
+                    getSelected(x, y);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
+    }
+
+    private void getSelected(int x, int y)
+    {
+        int xCord = 67;
+        int yCord = 29;
+
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++) {
+                if ((x > xCord && x < xCord + 90) && (y > yCord && y < yCord + 90)) {
+                    checkMatch();
+                    System.out.println(colSelectCord);
+                    System.out.println(rowSelectCord);
+                }
+                xCord += 90;
+                colSelectCord++;
+            }
+            xCord = 90;
+            colSelectCord = 0;
+            yCord += 90;
+            rowSelectCord++;
+        }
+        rowSelectCord = 0;
     }
 
     int colNum;
@@ -79,10 +111,12 @@ public class Bingo {
         if(diff.equalsIgnoreCase("easy"))
         {
             difficulty = 25;
+            Main.board.markSpot(board.getGraphics(), 215, 230);
         }
         else if(diff.equalsIgnoreCase("normal"))
         {
             difficulty = 50;
+            Main.board.markSpot(board.getGraphics(), 215, 230);
         }
         else
         {
@@ -117,8 +151,9 @@ public class Bingo {
             if(Integer.parseInt(Main.bingoHome.getBoardNum(colSelectCord, rowSelectCord)) == Integer.parseInt(Main.bingoHome.getBoardNum(colNum, i)))
             {
                 tracker[colNum][i] = true;
-//                Main.board.markSpot(Main.board.getXCord(colNum), Main.board.getYCord(i));
-                Main.board.markSpot(70, 70);
+                System.out.println("Test");
+                Main.board.markSpot(board.getGraphics(), (colNum * 90) + 35, (i * 90) + 50);
+                break;
             }
         }
     }
