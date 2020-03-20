@@ -1,4 +1,4 @@
-package com.caddocareer;
+package com.company.utilities;
 
 import java.util.Random;
 
@@ -92,3 +92,4 @@ public class Randomizer{
 
 
 }
+
