@@ -136,12 +136,12 @@ public class Bingo {
         return col + " " + boxNum;
     }
 
-    private void checkMatch()
+    private boolean checkMatch()
     {
         if(board.getBoardNums(colSelect, rowSelect).equalsIgnoreCase("Free"))
         {
             board.markSpot(boardSpaces.getGraphics(), board.getNumXCord(colSelect, rowSelect), board.getNumYCord(colSelect, rowSelect));
-            return;
+            return true;
         }
         for(int i = 0; i < 5; i++)
         {
@@ -152,6 +152,7 @@ public class Bingo {
                 break;
             }
         }
+        return false;
     }
 
     private void checkWin()
@@ -204,21 +205,21 @@ public class Bingo {
                 if(diagCount1 == 5)
                 {
                     //Winner
+                    chosenSpot.setText("You Won!");
                 }
             }
         }
         //Checks Diagnol 2
         int diagCount2 = 0;
-        int difference = 4;
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
-            if(board.getTracker(i, i + difference))
+            if(board.getTracker(i, 4 - i))
             {
-                difference -= 1;
                 diagCount2++;
                 if(diagCount2 == 5)
                 {
                     //Winner
+                    chosenSpot.setText("You Won!");
                 }
             }
         }

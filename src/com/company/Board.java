@@ -87,8 +87,15 @@ public class Board extends JPanel {
                 {
                     if(boardNums[col][row].equals(boardNums[col][i]))
                     {
-                        boardNums[col][row] = String.valueOf(Randomizer.nextInt(0, difficulty));
-                        continue;
+                        String replacement = String.valueOf(Randomizer.nextInt(0, difficulty));
+                        for(int j = 0; j < 5; j++)
+                        {
+                            if (!boardNums[col][j].equalsIgnoreCase(replacement)) {
+                                boardNums[col][row] = replacement;
+                                break;
+                            }
+                        }
+
                     }
                 }
 
@@ -122,7 +129,7 @@ public class Board extends JPanel {
     public void markSpot(Graphics g, int x, int y)
     {
         g.setColor(Color.RED);
-        g.fillOval(x + 30, y - 25, 80, 80);
+        g.fillOval(x + 35, y - 40, 80, 80);
         revalidate();
 
     }
@@ -130,10 +137,24 @@ public class Board extends JPanel {
     private void header(Graphics g)
     {
         //Draws B
-        g.fillRect(10, -25, 13, 90);
-//        g.setFont();
+        Font font = new Font("Verdana", Font.BOLD, 100);
+        g.setFont(font);
+        g.drawString("B", 10, 75);
 
         //Draws I
-        g.fillRect(100, -25, 100, 90);
+//        g.fillRect(145, 5, 10, 70);
+        g.drawString("I", 130, 75);
+
+        //Draws N
+        g.drawString("N", 210, 75);
+
+        //Draws G
+        g.drawString("G", 310, 75);
+
+        //Draws O
+        g.drawString("O", 410, 75);
+
+        Font normalFont = new Font("Verdana", Font.PLAIN, 12);
+        g.setFont(normalFont);
     }
 }
