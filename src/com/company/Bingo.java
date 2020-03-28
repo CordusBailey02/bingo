@@ -13,9 +13,10 @@ public class Bingo {
     private JPanel boardSpaces;
     private JLabel chosenSpot;
     private JButton playButton;
-    private JButton button1;
+    private JButton previousCallButton;
     private int colSelect = 0;
     private int rowSelect = 0;
+    private int counter = 0;
     private Board board = new Board();
 
     public JPanel getjPanel()
@@ -28,12 +29,23 @@ public class Bingo {
     public Bingo()
     {
         boardSpaces.add(board);
-        //Chooses First Spot
 
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 chosenSpot.setText(chooseNum(String.valueOf(Main.bingoHome.comboBoxDiff.getSelectedItem())));
+                counter++;
+            }
+        });
+        previousCallButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(counter > 0)
+                {
+                    chosenSpot.setText(prevColLetter + " " + prevBoxNum);
+                    colNum = prevCol;
+                    boxNum = prevBoxNum;
+                }
             }
         });
         boardSpaces.addMouseListener(new MouseListener() {
@@ -94,6 +106,10 @@ public class Bingo {
         }
     }
 
+    String prevColLetter;
+    int prevCol;
+    int prevBoxNum;
+
     int colNum;
     int boxNum;
     private String chooseNum(String diff)
@@ -133,6 +149,11 @@ public class Bingo {
         {
             col = "O";
         }
+
+        prevCol = colNum;
+        prevBoxNum = boxNum;
+        prevColLetter = col;
+
         return col + " " + boxNum;
     }
 
@@ -143,14 +164,10 @@ public class Bingo {
             board.markSpot(boardSpaces.getGraphics(), board.getNumXCord(colSelect, rowSelect), board.getNumYCord(colSelect, rowSelect));
             return true;
         }
-        for(int i = 0; i < 5; i++)
+        else if (board.getBoardNums(colSelect, rowSelect).equals(String.valueOf(boxNum)))
         {
-            if (Integer.parseInt(board.getBoardNums(colSelect, rowSelect)) == Integer.parseInt(board.getBoardNums(colNum, i)) && rowSelect == i)
-            {
-                board.setTracker(colNum, i, true);
-                board.markSpot(boardSpaces.getGraphics(), board.getNumXCord(colNum, i), board.getNumYCord(colNum, i));
-                break;
-            }
+            board.setTracker(colSelect, rowSelect, true);
+            board.markSpot(boardSpaces.getGraphics(), board.getNumXCord(colNum, rowSelect), board.getNumYCord(colNum, rowSelect));
         }
         return false;
     }
@@ -171,6 +188,7 @@ public class Bingo {
                     {
                         //Winner
                         chosenSpot.setText("You Won!");
+                        System.exit(-1);
                     }
                 }
             }
@@ -189,6 +207,7 @@ public class Bingo {
                     {
                         //Winner
                         chosenSpot.setText("You Won!");
+                        System.exit(-1);
                     }
                 }
             }
@@ -206,6 +225,7 @@ public class Bingo {
                 {
                     //Winner
                     chosenSpot.setText("You Won!");
+                    System.exit(-1);
                 }
             }
         }
@@ -220,6 +240,7 @@ public class Bingo {
                 {
                     //Winner
                     chosenSpot.setText("You Won!");
+                    System.exit(-1);
                 }
             }
         }
